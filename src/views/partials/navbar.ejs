@@ -1,0 +1,33 @@
+<!-- Navbar -->
+<nav class="bg-slate-950 text-white h-16 flex items-center justify-between px-6 w-full fixed top-0 left-0 z-10">
+  <div class="flex items-center">
+    <!-- Sidebar Toggle Button -->
+    <button class="lg:hidden text-white focus:outline-none">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="ml-4 text-xl font-semibold">
+      <a href="/" class="text-white">Yönetim Paneli</a>
+    </div>
+  </div>
+
+  <div class="flex items-center space-x-6">
+    <!-- Search Icon -->
+    <button class="text-white">
+      <i class="fas fa-search"></i>
+    </button>
+
+    <!-- User Avatar and Dropdown -->
+    <div class="relative">
+      <button class="flex items-center space-x-2">
+        <img src="https://www.gravatar.com/avatar?d=mp" alt="Avatar" class="w-8 h-8 rounded-full">
+        <span>Admin</span>
+      </button>
+      <div class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg hidden">
+        <ul>
+          <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Üyeliğini Yükselt</a></li>
+          <li><a href="/logout" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Çıkış Yap</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

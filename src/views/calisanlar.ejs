@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Çalışanlar</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <%- include('./partials/navbar') %>
+
+  <div class="flex">
+
+    <!-- Sidebar -->
+    <%- include('./partials/sidebar') %>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 p-6 mt-16"> <!-- Sidebar'a göre margin-left ve navbar için margin-top eklendi -->
+      <h1 class="text-3xl font-semibold text-gray-800 mb-6">Çalışanlar</h1>
+      
+      <!-- Çalışan Tablosu -->
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <table class="table-auto w-full text-left border-collapse border border-gray-300">
+          <thead class="bg-purple-600 text-white">
+            <tr>
+              <th class="p-4 text-sm font-medium">ID</th>
+              <th class="p-4 text-sm font-medium">İsim</th>
+              <th class="p-4 text-sm font-medium">Soyisim</th>
+              <th class="p-4 text-sm font-medium">Maaş</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% calisanlar.forEach(calisan => { %>
+              <tr class="border-b border-gray-200 hover:bg-gray-50 transition duration-200">
+                <td class="p-4 text-sm"><%= calisan.id %></td>
+                <td class="p-4 text-sm"><%= calisan.isim %></td>
+                <td class="p-4 text-sm"><%= calisan.soyisim %></td>
+                <td class="p-4 text-sm"><%= calisan.maas %> TL</td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Çalışan Ekleme Formu -->
+      <div class="bg-white shadow-lg rounded-lg p-6 mt-8">
+        <h2 class="text-xl font-semibold text-gray-800 mb-6">Yeni Çalışan Ekle</h2>
+        <form action="/calisanlar/ekle" method="POST" class="space-y-6">
+          <div>
+            <label for="isim" class="block text-sm font-medium text-gray-700">İsim</label>
+            <input
+              type="text"
+              name="isim"
+              id="isim"
+              placeholder="İsim"
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
+              required
+            />
+          </div>
+          <div>
+            <label for="soyisim" class="block text-sm font-medium text-gray-700">Soyisim</label>
+            <input
+              type="text"
+              name="soyisim"
+              id="soyisim"
+              placeholder="Soyisim"
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
+              required
+            />
+          </div>
+          <div>
+            <label for="maas" class="block text-sm font-medium text-gray-700">Maaş (TL)</label>
+            <input
+              type="number"
+              name="maas"
+              id="maas"
+              placeholder="Maaş"
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none"
+              step="0.01"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-800 transition duration-200"
+          >
+            Çalışan Ekle
+          </button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <%- include('./partials/footer') %>
+
+</body>
+</html>

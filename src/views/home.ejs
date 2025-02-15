@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Çalışan ve Mesai Takip Sistemi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <%- include ('./partials/navbar') %>
+
+  <div class="flex min-h-screen pt-16">
+    <!-- Sidebar -->
+    <%- include ('./partials/sidebar') %>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 ml-64">
+      <h2 class="text-3xl font-bold mb-4">Anasayfa</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Placeholder Cards -->
+        <div class="bg-white shadow-lg rounded-lg p-6">
+          <h3 class="text-lg font-semibold mb-2">Çalışanlar</h3>
+          <p class="text-sm text-gray-600">Tüm çalışanları görüntüleyin ve yönetin.</p>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg p-6">
+          <h3 class="text-lg font-semibold mb-2">Mesai Hesapla</h3>
+          <p class="text-sm text-gray-600">Çalışanların mesai saatlerini hesaplayın.</p>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg p-6">
+          <h3 class="text-lg font-semibold mb-2">Kesinti Hesaplama</h3>
+          <p class="text-sm text-gray-600">Kesinti durumlarını yönetin.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <%- include ('./partials/footer') %>
+</body>
+</html>

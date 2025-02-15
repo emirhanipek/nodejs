@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mesai Hesaplama</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <%- include('./partials/navbar') %>
+
+  <div class="flex">
+
+    <!-- Sidebar -->
+    <%- include('./partials/sidebar') %>
+
+    <!-- Main Content -->
+    <main class="flex-1 ml-64 p-6 mt-16"> <!-- Sidebar'a göre margin-left ve navbar için margin-top eklendi -->
+      <div class="container mx-auto bg-white p-8 shadow-md rounded-lg">
+        <h1 class="text-xl font-bold text-center text-gray-700 mb-8">
+          Mesai Hesaplama
+        </h1>
+        
+        <form action="mesai/add" method="POST" class="space-y-6">
+          <!-- Çalışan Seçimi -->
+          <div>
+            <label for="calisan" class="block text-lg font-semibold text-gray-600 mb-2">Çalışan Seç:</label>
+            <select id="calisan" name="calisan_id" class="w-full bg-gray-200 text-gray-800 p-3 rounded focus:outline-none focus:ring-2 focus:ring-purple-600" onchange="calculateWages()">
+              <option value="" selected>Bir Çalışan Seçiniz </option>
+              <% employees.forEach(employee => { %>
+
+                <option value="[<%= employee.id%>,<%= employee.maas %>]">
+                  <%= employee.isim %> <%= employee.soyisim %> (Maaş: <%= employee.maas %> TL)
+                </option>
+              <% }) %>
+            </select>
+          </div>
+
+          <!-- Mesai Tutarları -->
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-medium text-gray-700">1 Günlük Mesai Tutarı:</span>
+              <span id="daily-wage" class="text-lg font-semibold text-purple-600">0</span> TL
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-medium text-gray-700">1 Saatlik Mesai Tutarı:</span>
+              <span id="hourly-wage" class="text-lg font-semibold text-purple-600">0</span> TL
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-medium text-gray-700">1 Haftalık Mesai Tutarı:</span>
+              <span id="weekly-wage" class="text-lg font-semibold text-purple-600">0</span> TL
+            </div>
+          </div>
+
+          <!-- Mesai Ücret Girişi -->
+          <div>
+            <label for="mesai_ucreti" class="block text-lg font-semibold text-gray-600 mb-2">Mesai Ücreti (Girilen):</label>
+            <input type="number" name="mesai_ucreti" id="mesai_ucreti" class="w-full bg-gray-200 text-gray-800 p-3 rounded focus:outline-none focus:ring-2 focus:ring-purple-600" placeholder="Ücret Girin" required>
+          </div>
+
+          <!-- Tarih -->
+          <div>
+            <label for="tarih" class="block text-lg font-semibold text-gray-600 mb-2">Mesai Tarihi:</label>
+            <input type="date" name="tarih" id="tarih" class="w-full bg-gray-200 text-gray-800 p-3 rounded focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+          </div>
+
+          <!-- Kayıt Butonu -->
+          <button type="submit" class="w-full bg-black text-white py-3 rounded font-semibold text-lg hover:bg-purple-800 transition duration-300">
+            <i class="fas fa-save"></i> Mesaiyi Kaydet
+          </button>
+        </form>
+      </div>
+    </main>
+   
+  </div>
+
+  <!-- Footer -->
+  <%- include('./partials/footer') %>
+
+  <!-- JavaScript -->
+  <script>
+    function calculateWages() {
+
+
+      const select = document.getElementById("calisan");
+      const selectedValue = select.value;
+      const parsedData = JSON.parse(selectedValue);
+      const userId = parsedData[0];
+      const maas = parsedData[1];
+
+      if (!maas || isNaN(maas)) {
+        alert("Lütfen bir çalışan seçin.");
+        return;
+      }
+
+      // Hesaplamalar
+      const dailyWage = (maas / 28).toFixed(2);
+      const hourlyWage = (dailyWage / 11).toFixed(2);
+      const weeklyWage = (maas / 4).toFixed(2);
+
+      // Değerleri DOM'a yazdır
+      document.getElementById("daily-wage").textContent = dailyWage;
+      document.getElementById("hourly-wage").textContent = hourlyWage;
+      document.getElementById("weekly-wage").textContent = weeklyWage;
+    }
+  </script>
+
+</body>
+</html>
